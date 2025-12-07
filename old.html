@@ -3,17 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Microbetting</title>
+  <title>Popup Feed Demo</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <main class="app">
-    <h1>Microbetting demo app</h1>
-    <p>Click the button to open a popup window that contains a scrollable feed.</p>
-    <button id="open-feed-btn" class="btn">Open Feed</button>
+    <h1>Popup Feed Demo</h1>
+    <p>Click a button to open the feed — either as an in-page modal or as a separate browser window.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <button id="open-feed-btn" class="btn">Open In-Page Feed</button>
+      <button id="open-window-btn" class="btn">Open in New Window</button>
+    </div>
   </main>
 
-  <!-- Popup overlay -->
+  <!-- Popup overlay (in-page modal) -->
   <div id="feed-overlay" class="overlay hidden" aria-hidden="true">
     <div class="popup" role="dialog" aria-modal="true" aria-labelledby="feed-title">
       <header class="popup-header">
@@ -36,6 +39,18 @@
       </footer>
     </div>
   </div>
+
+  <script>
+    // Small helper to open the standalone popup window
+    document.addEventListener('DOMContentLoaded', () => {
+      const openWindowBtn = document.getElementById('open-window-btn');
+      openWindowBtn.addEventListener('click', () => {
+        // popup.html must be present next to index.html
+        const features = 'width=760,height=640,menubar=no,toolbar=no,location=no,status=no';
+        window.open('popup.html', 'FeedPopup', features);
+      });
+    });
+  </script>
 
   <script src="script.js"></script>
 </body>
